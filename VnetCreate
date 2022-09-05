@@ -1,0 +1,25 @@
+#---
+# Azure Global Variables
+#---
+MyResourceGroup="1-4de8d7c2-playground-sandbox"
+MyLocation="SouthCentralUS"
+Password='LndYvFaQ8#Sfh6nGeech'
+
+#---
+# Azure Static Variables
+#---
+vnet1="vnet100"
+az config set extension.use_dynamic_install=yes_without_prompt
+
+#---
+# Azure VNET
+#---
+
+az network vnet create --resource-group $MyResourceGroup --name $vnet \
+    --address-prefixes 10.100.0.0/16
+
+az network vnet subnet create --resource-group $MyResourceGroup --vnet-name $vnet \
+    --name default \
+    --address-prefix 10.100.0.0/24 \
+    --disable-private-endpoint-network-policies false \
+    --disable-private-link-service-network-policies false
